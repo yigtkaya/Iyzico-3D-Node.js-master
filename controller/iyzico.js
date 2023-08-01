@@ -9,9 +9,9 @@ var iyzipay = new Iyzipay({
 async function pay(req, res) {
     try {
         const { cardHolderName, cardNumber,
-            price, contactName, city, country, address, 
+            price, contactName, city, country, address,
             surName, email,
-             expireMonth, expireYear, cvc } = req.body;
+            expireMonth, expireYear, cvc } = req.body;
         var request = {
             locale: Iyzipay.LOCALE.TR,
             conversationId: '123456789',
@@ -65,11 +65,28 @@ async function pay(req, res) {
                 }
             ]
         };
-            iyzipay.payment.create(request, function (err, result) {
-                console.log(err, result);
-                res.status(200).send(result);
-            });
-    
+        iyzipay.payment.create(request, function (err, result) {
+            if (result.status == "success") {
+                var neededResponse = {
+                    status: result.status,
+                    price: result.price,
+                    systemTime: result.systemTime,
+                    paymentId: result.paymentId
+                }
+                console.log(neededResponse);
+                res.send(neededResponse)
+            }
+            else {
+                var neededResponse = {
+                    status: result.status,
+                    errorMessage: result.errorMessage,
+                    systemTime: result.systemTime,
+                }
+                console.log(neededResponse);
+                res.send(neededResponse);
+            }
+        });
+
     } catch (e) {
         res.send(`İşlem Başarısız ${e}`);
     }

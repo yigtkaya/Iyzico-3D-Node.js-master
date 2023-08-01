@@ -1,0 +1,9 @@
+{
+    "status": "failure",
+    "errorCode": "10012",
+    "errorMessage": "Geçersiz işlem",
+    "errorGroup": "INVALID_TRANSACTION",
+    "locale": "tr",
+    "systemTime": 1690818214876,
+    "conversationId": "123456789"
+}
