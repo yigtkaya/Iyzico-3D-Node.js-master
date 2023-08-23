@@ -66,24 +66,28 @@ async function pay(req, res) {
             ]
         };
         iyzipay.payment.create(request, function (err, result) {
-            if (result.status == "success") {
-                var neededResponse = {
-                    status: result.status,
-                    price: result.price,
-                    systemTime: result.systemTime,
-                    paymentId: result.paymentId
-                }
-                console.log(neededResponse);
-                res.send(neededResponse)
-            }
-            else {
-                var neededResponse = {
+            if (err) {
+                var responseToClient = {
                     status: result.status,
                     errorMessage: result.errorMessage,
-                    systemTime: result.systemTime,
+                    errorCode: result.errorCode,
                 }
-                console.log(neededResponse);
-                res.send(neededResponse);
+                console.log(responseToClient);
+                res.send(responseToClient);
+            } else {
+                if (result.status == "success") {
+                    var responseToClient = {
+                        status: result.status,
+                        price: result.price,
+                        systemTime: result.systemTime,
+                        paymentId: result.paymentId
+                    }
+                    console.log(responseToClient);
+                    res.send(responseToClient)
+                } else {
+                    console.log(result.errorMessage);
+                    res.send(result);
+                }
             }
         });
 
