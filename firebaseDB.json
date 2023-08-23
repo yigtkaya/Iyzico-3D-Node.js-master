@@ -1,0 +1,13 @@
+{
+    "messagesDB": {
+        "id": "1_1",
+        "messages": [
+            {
+                "receiverId": "1",
+                "senderId": "1",
+                "message": "Hello",
+                "timestamp": "2019-01-01 00:00:00"
+            }
+        ]
+    }
+}
