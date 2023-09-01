@@ -11,9 +11,9 @@ async function pay(req, res) {
         const { cardHolderName, cardNumber,
             price, contactName, city, country, address,
             surName, email,
-            expireMonth, expireYear, cvc } = req.body;
+            expireMonth, expireYear, cvc, zipcode } = req.body;
         var request = {
-            locale: Iyzipay.LOCALE.TR,
+            locale: Iyzipay.LOCALE.EN,
             conversationId: '123456789',
             price: price,
             paidPrice: price,
@@ -39,7 +39,7 @@ async function pay(req, res) {
                 ip: '85.34.78.112',
                 city: city,
                 country: country,
-                zipCode: '34732'
+                zipCode: zipcode
             },
             shippingAddress: {
                 contactName: contactName,
@@ -53,13 +53,13 @@ async function pay(req, res) {
                 city: city,
                 country: country,
                 address: address,
-                zipCode: '34742'
+                zipCode: zipcode
             },
             basketItems: [
                 {
                     id: 'BI102',
                     name: 'Game code',
-                    category1: 'Game',
+                    category1: 'Hair Transplant',
                     itemType: Iyzipay.BASKET_ITEM_TYPE.VIRTUAL,
                     price: price
                 }
